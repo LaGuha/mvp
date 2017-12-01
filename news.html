@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!--  <link rel="stylesheet" href="../css/style.css">-->
+    <link rel="stylesheet" href="css/rate.css">
+    <link rel="stylesheet" href="js/select/selectivity.min.css">
+    <link rel="stylesheet" href="js/select/selectivity-jquery.css">
+    <link rel="stylesheet" href="css/news.css">
+</head>
+<body>
+    <div class="main-wrapper">
+
+        <nav class="navbar">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="container-fluid navbar_inner">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-2 navbar_cell first_title"><a href="#" class="navbar_option">Главная</a></div>
+                        <div class="col-xs-12 col-md-2 navbar_cell"><div class="option_wrapper"><a href="#" class="navbar_option">О нас</a></div></div>
+                        <div class="col-xs-12 col-md-2 navbar_cell"><div class="option_wrapper"><a href="#" class="navbar_option">Рейтинги</a></div></div>
+                        <div class="col-xs-12 col-md-2 navbar_cell"><div class="option_wrapper"><a href="#" class="navbar_option">Публикации</a></div></div>
+                        <div class="col-xs-12 col-md-2 navbar_cell"><div class="option_wrapper"><a href="#" class="navbar_option">Новости</a></div></div>
+                        <div class="col-xs-12 col-md-2 navbar_cell last_title"><div class="option_wrapper"><a href="#" class="navbar_option">База</a></div></div>
+                    </div>
+                 </div>
+            </div>
+        </nav>
+        <div class="lang">
+            <span class="lang-selected">рус</span>
+            <span class="gray">/</span>
+            <span class="lang-inactive">eng</span>
+        </div>
+        <div class="news_area">
+            
+        </div>
+    </div>
+    <!-- FOOTER -->
+    <footer>
+        <div class="container-fluid footer-inner">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="author">&copy; 2017 Да— Стратегия</div>
+                    <div class="media_wrapper">
+                        <!--<a href="#" class="media connection">Обратная связь</a>-->
+                        <a href="#" class="media">
+                            <img src="../images/fb.png" alt="" class="social-loco">
+                        </a>
+                        <a href="#" class="media">
+                            <img src="../images/vk.png" alt="" class="social-loco">
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="https://use.fontawesome.com/7b8cae45d5.js"></script>
+    <script src="js/select/selectivity-jquery.js"></script>
+    <script src="js/script-rate.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.ajax({
+                url: "funcs.php",
+                type: "GET",
+                data:{
+                    need: 'news',
+                    kind: 'all'
+                },
+                success: function(data){
+                    d=JSON.parse(data)
+                    console.log(d)
+                    for (j=0;j<d.length;j++){
+                        if ((j+1) % 2 == 1){
+                            header='<div class="news-block second-block"><div class="row"><div class="col-md-8 col-md-push-4"><div class="news-header"><a href="#">'+
+                                d[j].Header+'</a></div> </div>'
+            //--------------------------------IMG-----------------------------------------
+                            img='<div class="col-md-4 col-md-pull-8"> <img src="'+
+                            d[j].Img+'" alt="Изображение новости" class="img-responsive img-news"> </div>'
+            //--------------------------------Content-----------------------------------------
+                            content='<div class="col-md-8 col-md-offset-4 news-content"><div class="data-img"><img src="images/notebook.png" alt="Дата: " class="news-date"><span class="news-date-text">'+
+                            d[j].Data+'</span></div><a href="#" class="news-common">'+
+                            d[j].Descr+'</a><a href="#" class="read-news news-date-text">Далее...</a></div></div>'
+
+                        }else{
+                            header='<div class="news-block second-block"><div class="row"><div class="col-md-8"><div class="news-header"><a href="#">'+
+                                d[j].Header+'</a></div> </div>'
+            //--------------------------------IMG-----------------------------------------
+                            img='<div class="col-md-4"> <img src="'+
+                            d[j].Img+'" alt="Изображение новости" class="img-responsive img-news"> </div>'
+            //--------------------------------Content-----------------------------------------
+                           content='<div class="col-md-8 news-content"><div class="data-img"><img src="images/notebook.png" alt="Дата: " class="news-date"><span class="news-date-text">'+
+                            d[j].Data+'</span></div><a href="#" class="news-common">'+
+                            d[j].Descr+'</a><a href="#" class="read-news news-date-text">Далее...</a></div></div>'
+
+                        }
+                        if (!j){//---------------------First New
+                            header='<div class="news-block first-block"><div class="row"><div class="col-md-8 col-md-push-4"><div class="news-header"><a href="#">'+
+                                d[j].Header+'</a></div> </div>'
+                        }
+                        $('.news_area').append(header+img+content)
+
+                    }
+
+                }
+            })
+        })
+    </script>
+</body>
+</html>
